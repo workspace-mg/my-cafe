@@ -3,7 +3,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import service.CafeService;
-import service.DiscountService;
 import service.PriceService;
 import util.ProductUtility;
 import validator.OrderValidator;
@@ -24,10 +23,9 @@ public class CoffeeCornerIntegrationTest {
     public void setUpStreams() {
         OrderValidator validator = new OrderValidator();
         ProductUtility productUtility = new ProductUtility();
-        DiscountService discountService = new DiscountService();
         PriceService priceService = new PriceService();
         CafeService cafeService = new CafeService(priceService);
-        controller = new OrderManager(validator, productUtility, discountService, cafeService);
+        controller = new OrderManager(validator, productUtility, cafeService);
         System.setOut(new PrintStream(outContent));
     }
 

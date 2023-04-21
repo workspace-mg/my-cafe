@@ -3,6 +3,8 @@ package controller;
 import model.Product;
 import service.CafeService;
 import service.DiscountService;
+import service.pattern.strategy.impl.FreeCoffeeDiscountStrategy;
+import service.pattern.strategy.impl.SnackAndBeverageComboDiscountStrategy;
 import util.ProductUtility;
 import validator.OrderValidator;
 
@@ -15,13 +17,11 @@ public class OrderManager {
     private final List<Product> AVAILABLE_PRODUCTS;
     private final OrderValidator validator;
     private final ProductUtility productUtility;
-    private final DiscountService discountService;
     private final CafeService cafeService;
 
-    public OrderManager(OrderValidator validator, ProductUtility productUtility, DiscountService discountService, CafeService cafeService) {
+    public OrderManager(OrderValidator validator, ProductUtility productUtility, CafeService cafeService) {
         this.validator = validator;
         this.productUtility = productUtility;
-        this.discountService = discountService;
         this.cafeService = cafeService;
         AVAILABLE_PRODUCTS = Stream.of(
                         new Product("Small Coffee", 2.50, 0, "Beverage"),
@@ -45,7 +45,10 @@ public class OrderManager {
         Objects.requireNonNull(orderedItems, "Ordered items cannot be null");
         validator.validateOrderedItems(orderedItems, AVAILABLE_PRODUCTS);
         List<Product> productList = productUtility.constructProductUsingOrderedNames(orderedItems, AVAILABLE_PRODUCTS);
-        productList = discountService.applyDiscounts(productList);
+        DiscountService freeCoffeeDiscountService = new DiscountService(new FreeCoffeeDiscountStrategy());
+        productList = freeCoffeeDiscountService.applyDiscounts(productList);
+        DiscountService comboDiscountService = new DiscountService(new SnackAndBeverageComboDiscountStrategy());
+        productList = comboDiscountService.applyDiscounts(productList);
         cafeService.generateReceipt(productList);
     }
 

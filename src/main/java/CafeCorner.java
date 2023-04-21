@@ -1,6 +1,5 @@
 import controller.OrderManager;
 import service.CafeService;
-import service.DiscountService;
 import service.PriceService;
 import util.ProductUtility;
 import validator.OrderValidator;
@@ -13,10 +12,9 @@ public class CafeCorner {
     public static void main(String[] args) {
         OrderValidator validator = new OrderValidator();
         ProductUtility productUtility = new ProductUtility();
-        DiscountService discountService = new DiscountService();
         PriceService priceService = new PriceService();
         CafeService cafeService = new CafeService(priceService);
-        OrderManager controller = new OrderManager(validator, productUtility, discountService, cafeService);
+        OrderManager controller = new OrderManager(validator, productUtility, cafeService);
         List<String> orderedItems = Arrays.asList("Small Coffee",
                 "Medium Coffee",
                 "Large Coffee",
