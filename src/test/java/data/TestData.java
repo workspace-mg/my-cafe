@@ -62,29 +62,4 @@ public class TestData {
         return List.of(product1, product2, product3, product4, product5);
     }
 
-    public static List<Product> getProductsWithBeverageAndSnackAndBeverageCountFive() {
-        Product product1 = new Product("Small Coffee", 2.50, 0, "Beverage");
-        Product product2 = new Product("Medium Coffee", 3.00, 0, "Beverage");
-        Product product3 = new Product("Large Coffee", 3.50, 0, "Beverage");
-        Product product4 = new Product("Small Coffee With Extra Milk", 2.50, 0.30, "Beverage");
-        Product product5 = new Product("Small Coffee With Foamed Milk", 2.50, 0.50, "Beverage");
-        Product snack = new Product("Bacon Roll", 4.50, 0, "Snack");
-        return List.of(product1, product2, product3, product4, product5, snack);
-    }
-
-    public static List<Product> getProductsWithBeverageAndSnackAndBeverageCountLessThanFive() {
-        Product product1 = new Product("Small Coffee", 2.50, 0, "Beverage");
-        Product product3 = new Product("Large Coffee", 3.50, 0, "Beverage");
-        Product product4 = new Product("Large Coffee With Foamed Milk", 3.50, 0.50, "Beverage");
-        Product product5 = new Product("Small Coffee With Foamed Milk", 2.50, 0.50, "Beverage");
-        Product snack = new Product("Bacon Roll", 4.50, 0, "Snack");
-        return List.of(product1, product3, product4, product5, snack);
-    }
-
-    public static List<Product> getProductsWithDrinkAndBeverageWithAddOn() {
-        Product product1 = new Product("Large Coffee With Foamed Milk", 3.50, 0.50, "Beverage");
-        Product product2 = new Product("Orange Juice", 3.95, 0, "Drink");
-        return List.of(product1, product2);
-    }
-
 }
